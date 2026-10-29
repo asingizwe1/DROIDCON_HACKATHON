@@ -1,11 +1,11 @@
 {
-    "name": "aquafarm",
-    "short_name": "aquafarm",
+    "name": "AquaFarm",
+    "short_name": "AquaFarm",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#CE6D28",
+    "theme_color": "#CE6D28",
+    "description": "Fish farm inspections with typo-tolerant history search.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
