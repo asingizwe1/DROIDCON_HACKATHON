@@ -29,3 +29,7 @@ Thumbs.db
 
 # Local logs
 *.log
+
+# Typesense binary downloaded by scripts/get-typesense.sh (325 MB; GitHub's
+# per-file limit is 100 MB, so it is fetched, not committed)
+.typesense/

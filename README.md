@@ -68,6 +68,10 @@ server/
   typesense-service.js             collection schema, indexing, scoped keys
   data.js                          dummy farms, ponds, inspections
   seed.js                          create collection + bulk import
+scripts/dev.sh                   one-command local setup
+scripts/get-typesense.sh         fetch the Typesense binary (no Docker needed)
+scripts/run-typesense.sh         start Typesense, Docker or binary
+docker-compose.yml               Typesense via Compose
 ```
 
 ---
@@ -76,9 +80,30 @@ server/
 
 You need three things: Typesense, the API, and the app.
 
+### Fastest path
+
+```bash
+./scripts/dev.sh
+```
+
+That starts Typesense, creates the search-only key, writes `server/.env`, installs the API dependencies, seeds the collection, and runs the API. Then in a second terminal:
+
+```bash
+flutter pub get
+flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:8080
+```
+
+It is safe to re-run: an existing `.env` and search key are reused rather than replaced.
+
 ### 1. Typesense
 
-With Docker:
+**With Docker** (preferred):
+
+```bash
+docker compose up -d
+```
+
+or without Compose:
 
 ```bash
 # Pick your own admin key here; put the same value in server/.env
@@ -91,9 +116,14 @@ docker run -d --name typesense \
   --enable-cors
 ```
 
-`--enable-cors` is not optional: the Flutter **web** app calls Typesense from the browser, and without it every request is blocked by CORS.
+**Without Docker**: the server binary is about 325 MB, so it is not committed here — GitHub rejects files over 100 MB. Fetch the exact tested version instead:
 
-No Docker? Use the single binary from the [Typesense releases page](https://github.com/typesense/typesense/releases) with the same flags.
+```bash
+./scripts/get-typesense.sh      # downloads v27.1 for your OS/CPU into .typesense/
+./scripts/run-typesense.sh      # starts it on port 8108 with CORS on
+```
+
+`--enable-cors` is not optional: the Flutter **web** app calls Typesense from the browser, and without it every request is blocked by CORS. Both the compose file and both run paths turn it on.
 
 ### 2. The API
 

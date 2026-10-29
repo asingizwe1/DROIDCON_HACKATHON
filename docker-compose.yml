@@ -1,0 +1,22 @@
+# Docker Compose for the local Typesense server.
+#
+#   docker compose up -d
+#
+# --enable-cors is not optional: the Flutter web build queries Typesense
+# straight from the browser, and without it every search request is blocked.
+services:
+  typesense:
+    image: typesense/typesense:27.1
+    container_name: aquafarm-typesense
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense-data:/data
+    command: >
+      --data-dir /data
+      --api-key=${TYPESENSE_ADMIN_KEY:-local-dev-key-change-me}
+      --enable-cors
+    restart: unless-stopped
+
+volumes:
+  typesense-data:
