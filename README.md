@@ -17,6 +17,18 @@ Type `tilapa` → finds **tilapia** stock.
 
 Results show the pond, species, date and a snippet of the notes with the matched words highlighted. Tapping one opens the full inspection.
 
+![The farm dashboard, with recent inspections](docs/dashboard.png)
+
+Searching `ammonea` still finds the notes that say **ammonia**:
+
+![Searching "ammonea" and finding ammonia](docs/search-ammonea.png)
+
+The same for `tilapa` and **tilapia** stock:
+
+![Searching "tilapa" and finding tilapia stock](docs/search-tilapa.png)
+
+There is a [59-second screen recording](docs/demo.mp4) of the whole flow — picking a farmer, opening a farm and a pond, then running four searches — if you would rather watch it than run it.
+
 ---
 
 ## Why the search is built this way
@@ -116,12 +128,14 @@ docker run -d --name typesense \
   --enable-cors
 ```
 
-**Without Docker**: the server binary is about 325 MB, so it is not committed here — GitHub rejects files over 100 MB. Fetch the exact tested version instead:
+**Without Docker**: the server binary is about 325 MB and is not committed here, because GitHub rejects any file over 100 MB. Fetch the exact tested version instead:
 
 ```bash
 ./scripts/get-typesense.sh      # downloads v27.1 for your OS/CPU into .typesense/
 ./scripts/run-typesense.sh      # starts it on port 8108 with CORS on
 ```
+
+The download is checked against a pinned SHA-256 (the Linux/amd64 build) and the script aborts if it does not match, so a corrupted or swapped archive never becomes your search server.
 
 `--enable-cors` is not optional: the Flutter **web** app calls Typesense from the browser, and without it every request is blocked by CORS. Both the compose file and both run paths turn it on.
 
