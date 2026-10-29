@@ -1,0 +1,28 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+.idea/
+.vscode/
+.flutter-plugins
+.flutter-plugins-dependencies
+aquafarm.iml
+
+# Web build output
+build/web/
+
+# Secrets — never commit these
+.env
+server/.env
+*.local
+
+# Node
+server/node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
