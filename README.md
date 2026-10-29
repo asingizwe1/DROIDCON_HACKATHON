@@ -27,7 +27,7 @@ The same for `tilapa` and **tilapia** stock:
 
 ![Searching "tilapa" and finding tilapia stock](docs/search-tilapa.png)
 
-There is a [59-second screen recording](docs/demo.mp4) of the whole flow — picking a farmer, opening a farm and a pond, then running four searches — if you would rather watch it than run it.
+There is a [59-second narrated demo](docs/demo.mp4) of the whole flow — picking a farmer, opening a farm and a pond, then running four searches — if you would rather watch it than run it.
 
 ---
 
