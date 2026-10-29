@@ -34,10 +34,17 @@ if [ ! -x "$BIN" ]; then
 fi
 
 mkdir -p "$DATA_DIR"
-echo "Starting Typesense (local binary) on port $PORT..."
+
+# Typesense also opens an internal peering port, defaulting to api-port - 1.
+# Left at the default, a second local instance collides with the first and
+# reports unhealthy, so derive it from the API port instead.
+PEERING_PORT=$((PORT - 1))
+
+echo "Starting Typesense (local binary) on port $PORT (peering $PEERING_PORT)..."
 exec "$BIN" \
   --data-dir "$DATA_DIR" \
   --api-key="$ADMIN_KEY" \
   --api-port="$PORT" \
+  --peering-port="$PEERING_PORT" \
   --enable-cors \
   --listen-address 0.0.0.0
